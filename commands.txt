@@ -1,0 +1,52 @@
+1)add user
+sudo adduser priti
+
+2)give user sudo privileges
+sudo usermod -aG sudo priti
+
+3)check network setting - set static IP
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  version: 2
+  rerender:  networkd
+  ethernets:
+    enp0s3:
+      dhcp4: no
+      addresses: [192.168.1.100/24]
+      gateway4: 192.168.1.1
+      nameservers:
+	addresses: [8.8.8.8, 8.8.4.4]
+
+>>>apply these changes 
+sudo netplan apply
+
+4)disable IPv6
+sudo nano /etc/default/grub
+
+>>>>some changes in file
+
+5)sudo update-grub
+
+6)reboot the system
+sudo reboot
+
+7)configure service-list,stop and disable unneeded services
+sudo systemctl list-units --type=service --state=running
+
+8)stop service
+sudo systemctl stop Bluetooth.service
+
+9)disable service
+sudo systemctl disable Bluetooth.service
+
+10)sudo setting - costomize sudo behavior
+sudo visudo
+
+set 
+Defaults   timestamp_timestamp=10
+
+11)disable password prompt
+in file >>>
+newuser ALL=(ALL) NOPASSWD : ALL
+

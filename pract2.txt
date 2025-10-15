@@ -1,0 +1,69 @@
+//add new user
+
+sudo adduser priti
+
+
+// user sudo privileges 
+
+sudo usermod -aG sudo priti
+
+// network settings - set static ip
+
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses:
+        - 192.168.1.100/24
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+
+sudo chmod 600 /etc/netplan/01-netcfg.yaml
+
+sudo netplan apply
+
+ping -c 4 8.8.8.8      # test internet
+ping -c 4 google.com   # test DNS
+
+
+
+//disable IPv6 if not needed
+
+sudo nano /etc/default/grub
+
+add this line  ->    GRUB_CMDLINE_LINUX_DEFAULT="quiet splash ipv6.disable=1"
+
+sudo update-grub
+
+sudo reboot
+
+
+//configure services - list stop disable unneeded services
+
+ sudo systemctl list-units --type=service --state=running
+
+sudo systemctl stop bluetooth.service
+
+sudo systemctl disable bluetooth.service
+
+sudo systemctl is-enabled bluetooth.service
+
+//customize sudo behavior
+
+sudo visudo
+
+add this ->      Defaults timestamp_timeout=10
+                 <username> ALL(ALL:ALL) ALL
+
+
+
+

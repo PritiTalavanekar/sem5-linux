@@ -1,0 +1,22 @@
+sudo apt install ntp
+
+sudo nano /etc/ntp.conf
+ add line >>>>>>>>>
+restrict 192.168.18.0/24 mask 255.255.255.0 nomodify notrap
+
+sudo systemctl restart ntp
+sudo systemctl enable ntp
+sudo systemctl status ntp
+
+
+sudo timedatectl set-ntp true
+timedatectl status
+sudo systemctl restart systemd-timesyncd
+
+sudo timedatectl set-time "2025-10-17 16:00:00"
+
+
+
+sudo apt install ntp -y
+
+sudo 

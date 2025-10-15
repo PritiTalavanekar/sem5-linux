@@ -1,0 +1,81 @@
+apt install bind9 bind9utils bind9-doc net-tools -y
+
+cd /etc/bind
+
+sudo cp db.127 db.192
+
+sudo cp db.local db.example.com
+
+sudo nano db.example.com    // copy paste below content
+
+
+
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	example.com. root.example.com. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ns.example.com.
+@	IN	A	192.168.1.7
+
+
+
+sudo  nano db.192     // copy paste below content
+
+
+
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	ns.example.com. root.example.com. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ns.example.com.
+1.0.0	IN	PTR	example.com.
+
+
+
+nano /etc/bind/named.conf.local          // copy paste below content
+
+
+
+zone "example.com" {
+             type master;
+             file "/etc/bind/db.example.com";
+};
+
+zone "1.168.192.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.192";
+};
+
+
+
+
+sudo nano /etc/bind/named.conf.options     //copy paste below google dns
+
+
+forwarders {
+	8.8.8.8;
+	8.8.4.4;
+};
+
+
+sudo  systemctl restart bind9.service
+sudo  systemctl status bind9.service
+
+
+ping example.com in windows
+
+

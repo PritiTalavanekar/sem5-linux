@@ -1,0 +1,34 @@
+sudo apt install samba -y
+
+cd /srv
+
+sudo mkdir samba
+
+cd samba
+
+sudo mkdir share-Prachi
+
+sudo chmod 777 share-Prachi
+
+sudo nano /etc/samba/smb.conf
+
+[share_prachi]
+        comment = My Ubuntu Share
+        path = /srv/samba/share-Prachi
+        browsable = yes
+        read only =no
+        guest ok =no
+        writable = yes
+      
+
+
+
+turn off firewall and network protection all 3 networks
+add network adapter and set to host-only
+
+
+
+
+
+
+ubuntu@ubuntu-virtual-machine:/srv/samba/share_priti$ sudo touch priti.txt

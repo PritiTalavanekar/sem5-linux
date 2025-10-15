@@ -1,0 +1,26 @@
+1)sudo apt install isc-dhcp-server
+
+2)ip a
+
+3)sudo nano /etc/dhcp/dhcpd.conf
+
+subnet 192.168.18.0 netmask 255.255.255.0 {
+	range 192.168.18.100 192.168.18.200;
+	option routers 192.168.18.1;
+	option subnet-mask 255.255.255.0;
+	option domain-name-server 8.8.8.8 8.8.4.4;
+	option domain-name "localdomain";
+}
+
+
+4)sudo nano /etc/default/isc-dhcp-server
+>>>change interface card
+
+5)sudo systemctl restart isc-dhcp-server
+
+6)sudo systemctl enable isc-dhcp-server
+
+7)sudo systemctl status isc-dhcp-server
+
+8)sudo tail -f /var/log/syslog
+
