@@ -1,0 +1,38 @@
+sudo apt install nfs-kernel-server
+
+sudo mkdir -p /srv/nfs_share
+
+sudo chown nobody:nogroup /srv/nfs_share
+
+sudo chmod 777 /srv/nfs_share
+
+sudo nano /etc/exports
+>>>>>>> 
+	/srv/nfs_share 192.168.234.128(rw,sync.no_subtree_check)
+
+
+
+sudo exportfs -a
+
+sudo systemctl restart nfs-kernel-server
+
+sudo ufw allow from 192.168.234.0/24 to any port nfs
+
+sudo ufw enable
+
+sudo ufw reload
+
+sudo systemctl restart nfs-kernel-server
+
+sudo apt install nfs-common
+
+sudo mkdir -p /mnt/nfs/shared
+
+sudo mount -t nfs 192.168.234.128:/nfs_share /mnt/nfs/shared
+
+sudo df -h | grep nfs
+
+<<<<<  windows >>>>>
+
+
+
