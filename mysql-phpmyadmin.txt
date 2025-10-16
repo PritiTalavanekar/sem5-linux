@@ -1,0 +1,88 @@
+sudo apt-get install mysql-server
+
+sudo systemctl start mysql.service 
+ 
+sudo systemctl status mysql.service
+
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+sudo mysql
+
+show database;
+
+create database priti;
+
+
+
+sudo apt-get install phpmyadmin php-mbstring php-php-gettext -y 
+
+sudo dpkg --configure -a
+
+>>>select apache2
+
+Sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl -y
+
+sudo phpenmod mbstring
+
+sudo systemctl restart apache2
+
+sudo ln –s /etc/phpmyadmin/apache.conf  /etc/apache2/conf-available/phpmyadmin.conf
+
+sudo a2enconf phpmyadmin
+
+sudo systemctl reload apache2
+
+
+sudo nano /etc/php/8.1/apache2/php.ini
+>>>> verify display_error: On 
+            display_reporting: E_ALL
+
+
+
+php i | grep "Loaded Configuration File"
+
+sudo apt install libapache2-mod-php8.1
+
+sudo a2enmod php8.1
+
+sudo systemctl restart apache2
+
+sudo systemctl stop mysql 
+
+sudo mysqld_safe --skip-grant-tables &
+
+sudo systemctl start mysql
+
+sudo mysql -u root
+
+FLUSH PRIVILEGES;
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'admin123';
+
+EXIT;
+
+
+sudo systemctl restart  mysql
+
+sudo mysql -u root -p   or  sudo mysql
+
+SELECT user,host,plugin FROM mysql.user WHERE user='root';
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin@123';
+
+FLUSH PRIVILEGES;
+
+EXIT;
+
+sudo systemctl restart mysql
+
+sudo mysql -u root -p 
+
+
+localhost/phpMyAdmin
+
+
+
+
+
